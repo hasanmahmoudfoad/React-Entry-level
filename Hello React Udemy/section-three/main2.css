@@ -1,0 +1,18 @@
+.circle{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid;
+    background: rgb(255, 197, 197);
+}
+.square{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid;
+    background: rgb(134, 136, 255);
+}
+.rectangle{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid;
+    background: rgb(152, 255, 166);
+}
