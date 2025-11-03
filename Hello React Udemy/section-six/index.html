@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- REACT LIBRARY -->
+  <script src="https://unpkg.com/react@15.5.4/dist/react.js"></script>
+  <!-- REACT DOM LIBRARY -->
+  <script src="https://unpkg.com/react-dom@15.5.4/dist/react-dom.js"></script>
+  <!-- BABEL LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+  <title>section five functional props</title></head>
+<body>
+    <div id="app">React has not rendered yeet</div>
+
+    <script type="text/babel">
+
+
+
+        // function FamilyList(props){
+        //     let siblingsProps = props.siblings;
+        //     let siblingsListItem = siblingsProps.map((person)=>{
+        //         return(
+        //            <div key={person.id}> {person.name} </div>
+        //         );
+        //     });
+        //     return(
+        //         <div>{siblingsListItem}</div>
+        //     );
+        // }
+
+
+
+        function FamilyList(item) {
+            return(
+                <div>{item.siblings.map((person)=>{
+                   return <div key={person.id}>{person.name}</div>
+                })
+            }
+                </div>
+            );
+        }
+
+
+
+
+        // ARRAY OF OBJECTS - 3 PROPS (ID, NAME AND FEMALE) 3 VALUES (NUMBER, STRING, BOOLEAN)
+        let siblings = [
+            {id: 1, name: 'Chris', female: false},
+            {id: 2, name: 'Jeff', female: false},
+            {id: 3, name: 'Julie', female: true},
+            {id: 4, name: 'Jessica', female: true}
+            ];
+
+        ReactDOM.render(
+
+            <FamilyList
+                 siblings={siblings}
+            />,
+
+            document.getElementById('app')
+        )        
+    </script>
+
+</body>
+</html>

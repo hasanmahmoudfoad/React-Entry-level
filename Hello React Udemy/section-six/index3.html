@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- REACT LIBRARY -->
+  <script src="https://unpkg.com/react@15.5.4/dist/react.js"></script>
+  <!-- REACT DOM LIBRARY -->
+  <script src="https://unpkg.com/react-dom@15.5.4/dist/react-dom.js"></script>
+  <!-- BABEL LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+  <title>section five functional props</title></head>
+<body>
+    <div id="app">React has not rendered yeet</div>
+
+    <script type="text/babel">
+
+
+
+
+        // ARRAY OF OBJECTS - 3 PROPS (ID, NAME AND FEMALE) 3 VALUES (NUMBER, STRING, BOOLEAN)
+        let people = [
+            {id: 1, name: 'Chris', female: false},
+            {id: 2, name: 'Jeff', female: false},
+            {id: 3, name: 'Julie', female: true},
+            {id: 4, name: 'Jessica', female: true}
+            ];
+
+
+        function FamilyList(param) {
+            let styles = {
+                background:'red',
+                color:'white',
+                fontSize:'2rem',
+                margin:'1rem'
+            }
+
+            let femaleSiblings = param.people.filter((person)=>{
+                    return person.female;
+                }).map((person)=>{
+                    return(
+                    <li key={person.id}>{person.name}</li>
+                    )
+                });
+
+                
+            let maleSiblings = param.people.filter((person)=>{
+                    return !person.female;
+                }).map((person)=>{
+                    return(
+                    <li key={person.id}>{person.name}</li>
+                    )
+                });
+
+                
+            return(
+                <div style = {styles}>
+                   <div style={{background:'#008656'}}>
+                     <h2>Female Siblings</h2>
+                        <ol>
+                            {femaleSiblings}
+                        </ol>
+                    </div>
+                   <div style={{background:'#4c62a1'}}>
+                     <h2>Male Siblings</h2>
+                        <ol>
+                            {maleSiblings}
+                        </ol>
+                    </div>
+                </div>
+            );
+        }
+
+       
+        ReactDOM.render(
+            <FamilyList
+                people={people}
+            />,
+
+            document.getElementById('app')
+        );
+
+
+    </script>
+
+</body>
+</html>

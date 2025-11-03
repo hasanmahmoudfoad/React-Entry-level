@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- REACT LIBRARY -->
+  <script src="https://unpkg.com/react@15.5.4/dist/react.js"></script>
+  <!-- REACT DOM LIBRARY -->
+  <script src="https://unpkg.com/react-dom@15.5.4/dist/react-dom.js"></script>
+  <!-- BABEL LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+  <title>Color Spectrum Refactor</title></head>
+<body>
+    <div id="app">React didnt render yet</div>
+
+    <script type="text/babel">
+            
+        class ColorSpecturm extends React.Component{
+            render(){
+         
+
+                console.log(this.props.colorProp);
+
+                let PickedColor = this.props.colorProp.map((item)=>{       
+                    let colorStyles = {
+                        color: item.color,
+                        background: '#c7956161'
+                    }
+                    return (
+                        <div key={item.id} style={colorStyles}>
+                            {item.name}
+                        </div>
+                        )
+                });
+
+                return(
+                    <div>{PickedColor}</div>
+                )
+            }   
+     }
+
+        
+
+        let colorsArray = [
+            {id: 1, color: "red", name: "red"},
+            {id: 2, color: "orange", name: "orange"},
+            {id: 3, color: "yellow", name: "yellow"},
+            {id: 4, color: "green", name: "green"},
+            {id: 5, color: "blue", name: "blue"},
+            {id: 6, color: "indigo", name: "indigo"},
+            {id: 7, color: "violet", name: "violet"}
+            ];
+
+      // Challenge 1 - create prop of colors and assign it the value of our colors array
+
+    ReactDOM.render(
+      // REACT WHAT
+      <ColorSpecturm colorProp={colorsArray}/>,
+      document.getElementById("app")
+    );
+
+    </script>
+</body>
+</html>
