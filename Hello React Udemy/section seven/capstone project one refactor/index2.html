@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- REACT LIBRARY -->
+  <script src="https://unpkg.com/react@15.5.4/dist/react.js"></script>
+  <!-- REACT DOM LIBRARY -->
+  <script src="https://unpkg.com/react-dom@15.5.4/dist/react-dom.js"></script>
+  <!-- BABEL LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+  <!-- BOOTSTRAP LIBRARY -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>capstone project one</title></head>
+<body>
+    <div id="app">React has not rendered yet</div>
+
+<script type="text/babel">
+
+    // const friendlyWrapper = {
+    //     display: 'grid',
+    //     gridTemplateColumns: 'repeat(4, 1fr)',
+    //     gap: 10
+    // }
+
+     // <Avatar/> component
+    class Avatar extends React.Component{
+        render(){
+            let imgContainer = {
+                width: '75%',  
+                maxWidth: 200,              
+                borderRadius: '50%',
+                overflow: 'hidden',
+                margin: 'auto'
+            }
+            let avatarImg = {
+                width: '100%',
+                hight: '100%'
+            }
+            return(
+                <div style={imgContainer}>
+                    <img src={this.props.img} style={avatarImg}/>
+                </div>
+            )
+        }
+    }
+    
+    // <UserName/> component
+    class UserName extends React.Component{
+        render(){
+            let userNameStyel = {
+                textAlign: 'center'
+            }
+            return(
+                <h3 style={userNameStyel}>{this.props.cardName}</h3>
+            )
+        }
+    }
+   
+    // <GetConnected/> component
+    class GetConnected extends React.Component{
+        render(){
+            let GetConnectedWrapper = {
+                display: "flex",
+                justifyContent: "space-between"
+            }
+            return(
+                <div style={GetConnectedWrapper}>
+                    <Like/>
+                    <Share/>
+                    <Add/>
+                </div>
+            )
+        }
+    }
+   
+    // <Like/> component
+    class Like extends React.Component{
+        render(){
+            return(
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" 
+                        fill="red" stroke="darkred"/>
+                </svg>
+            )
+        }
+    }
+    // <Share/> component
+    class Share extends React.Component{
+        render(){
+            return(
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" 
+                        fill="blue" stroke="darkblue"/>
+                </svg>
+            )
+        }
+    }
+    // <Add/> component
+    class Add extends React.Component {
+        render(){
+            return(
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" 
+                        fill="green" stroke="darkgreen"/>
+                </svg>
+            )
+        }
+    }
+
+
+    // <Friendly/> complex component
+    class Friendly extends React.Component{
+        render(){
+            let friendlyStyle = {
+                boxShadow: '5px 5px 20px 0px',
+                padding: '1rem',
+            }
+            let maleRenderedCards = this.props.cards.filter((card)=>{
+                return card.gender === "male"
+            }).map((card)=>{
+                return(
+                <div className='col-3 m-3' style={friendlyStyle}>
+                    <Avatar img={card.img}/>
+                    <UserName cardName={card.name}/>
+                    <GetConnected/>                    
+                </div>
+                )
+            });
+            let femaleRenderedCards = this.props.cards.filter((card)=>{
+                return card.gender === "female"
+            }).map((card)=>{
+                return(
+                <div className='col-3 m-3' style={friendlyStyle}>
+                    <Avatar img={card.img}/>
+                    <UserName cardName={card.name}/>
+                    <GetConnected/>                    
+                </div>
+                )
+            });
+            return(
+                <div className='p-5'>
+                    <div className='row bg-light mb-4 p-5'>
+                        <h2>Male cards</h2>
+                        {maleRenderedCards}
+                    </div>
+                    <div className='row bg-light mb-4 p-5'>
+                        <h2>Female cards</h2>
+                        {femaleRenderedCards}
+                    </div>
+                </div>
+            )
+        }
+    }
+   
+
+    
+      var cardsArray = [
+                {id: 0, name: "Rob", gender: "male", img: "https://picsum.photos/id/7/200/200"},
+                {id: 1, name: "Charles", gender: "male", img:"https://picsum.photos/id/8/200/200"},
+                {id: 2, name: "Natalie", gender: "female", img: "https://picsum.photos/id/9/200/200"},
+                {id: 3, name: "Jenny", gender: "female", img: "https://picsum.photos/id/10/200/200"},
+                {id: 4, name: "Sarah", gender: "female", img: "https://picsum.photos/id/11/200/200"},
+                {id: 5, name: "Josh", gender: "male", img: "https://picsum.photos/id/12/200/200"},
+                {id: 6, name: "Kenny", gender: "male", img: "https://picsum.photos/id/13/200/200"},
+                {id: 7, name: "John", gender: "male", img: "https://picsum.photos/id/14/200/200"},
+                {id: 8, name: "Alisha", gender: "female", img: "https://picsum.photos/id/15/200/200"}
+                ];
+    ReactDOM.render(
+        <div>
+            <Friendly cards={cardsArray}/>
+        </div>,
+        document.getElementById('app')
+        )
+</script>
+
+</body>
+</html>
