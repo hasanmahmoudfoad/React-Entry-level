@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- REACT LIBRARY -->
+  <script src="https://unpkg.com/react@15.5.4/dist/react.js"></script>
+  <!-- REACT DOM LIBRARY -->
+  <script src="https://unpkg.com/react-dom@15.5.4/dist/react-dom.js"></script>
+  <!-- BABEL LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+  <!-- BOOTSTRAP LIBRARY -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Events part one</title>
+</head>
+<body>
+    <div id="app">React has not rendered yet</div>
+
+<script type="text/babel">
+
+ var mealsArray = [
+                {id: 0, meal:'Pizza', img: "https://img.freepik.com/free-photo/mushroom-pizza-with-tomato-sauce-served-round-bamboo-board_114579-1908.jpg?semt=ais_hybrid&w=740&q=80"},
+                {id: 1,  meal:'Burger', img:"https://img.freepik.com/free-vector/realistic-burger-chalkboard-background_79603-1042.jpg?semt=ais_hybrid&w=740&q=80"},
+                {id: 2,  meal:'Sea food', img: "https://img.freepik.com/free-photo/seafood-plate-with-fried-salmon-mussels-shrimps-calamari-lemon_140725-1613.jpg?semt=ais_hybrid&w=740&q=80"},
+]; 
+    class DinnerVote extends React.Component{
+        
+        constructor(props){
+            super(props);
+            this.state={
+                votes:0
+            }
+            this.addVote = this.addVote.bind(this);
+            this.subtractVote = this.subtractVote.bind(this);
+        };
+
+
+        addVote() {
+            // alert(`You added ${mealName}`);
+            this.setState({
+                votes : this.state.votes + 1 
+            })
+        }
+
+        subtractVote() {
+            // alert(`You subtracted ${mealName}`);
+            this.setState({
+                votes : this.state.votes - 1
+            })
+        }
+
+
+        render(){
+                    let mealCard = this.props.mealImg.map((mealObj)=>{
+                        return (
+                            <div key={mealObj.id} className='col-4'>
+                                <div className='m-2 p-1 text-center border '>
+                                    <img className='img-fluid p-2' src={mealObj.img} />
+                                    <h2>{mealObj.meal}</h2>
+                                    <div className='row p-3'>
+                                        <p className='col-6'>Vote here if u want this</p>
+                                        <button className='btn btn-success col-6' onClick={this.addVote}>+1</button>
+                                    </div>
+                                    <div className='row p-3'>
+                                        <p className='col-6'>Vote here if u DONT want this</p>
+                                        <button className='btn btn-danger col-6' onClick={this.subtractVote}>-1</button>
+                                    </div>
+                        
+                                    <p> Total: {this.state.votes}</p>
+                                </div>
+                            </div>
+
+                        )
+                    });
+            return(
+                    <div className='row m-5'>{mealCard}</div>
+            );
+        }
+    }
+ 
+    ReactDOM.render(
+        <div >
+            <DinnerVote mealImg={mealsArray}/>
+        </div>,
+        document.getElementById('app')
+        )
+</script>
+
+</body>
+</html>
