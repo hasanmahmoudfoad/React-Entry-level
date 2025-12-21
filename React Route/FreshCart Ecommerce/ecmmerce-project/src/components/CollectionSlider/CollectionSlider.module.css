@@ -1,0 +1,9 @@
+.collectionImgContainer {
+    max-height: 275px;
+    overflow: hidden;
+}
+
+.collectionImg {
+    width: 100%;
+    height: 100%;
+}

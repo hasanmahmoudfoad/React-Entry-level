@@ -1,0 +1,158 @@
+/* ProductsGridSkeleton.css */
+.products-grid-skeleton {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Filters Skeleton */
+.skeleton-filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.skeleton-filter {
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 20px;
+}
+
+/* Products Grid */
+.skeleton-products-grid {
+  display: grid;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.skeleton-product-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  background: white;
+}
+
+.skeleton-card-image {
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-card-content {
+  padding: 20px;
+}
+
+.skeleton-card-title {
+  width: 80%;
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.skeleton-card-price {
+  width: 40%;
+  height: 24px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.skeleton-card-rating {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.skeleton-star {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 50%;
+}
+
+.skeleton-card-button {
+  width: 100%;
+  height: 42px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* Pagination Skeleton */
+.skeleton-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.skeleton-page {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeleton-page.active {
+  background: linear-gradient(90deg, #e0e0e0 25%, #d0d0d0 50%, #e0e0e0 75%);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .skeleton-products-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .skeleton-products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px;
+  }
+  
+  .skeleton-card-image {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton-products-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .skeleton-filters {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .skeleton-filter {
+    width: 100%;
+  }
+}
