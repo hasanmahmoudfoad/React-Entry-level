@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Child1 from '../child1/Child1'
+import { Link, Outlet } from 'react-router-dom'
 
 
 export default class Parent extends Component {
@@ -41,15 +42,18 @@ export default class Parent extends Component {
 
   render() {
    let allProducts = this.state.product.map((pr, i)=>{
-    return (
-      pr.price < 120000 ?<Child1 
-      key={i} 
-      index={i} 
-      deleteProduct={()=> this.deleteProduct(pr.id)} 
-      updateProductIncrement={()=> this.updateProductIncrement(i)} 
-      updateProductDecrement={()=> this.updateProductDecrement(i)} 
-      inncomingProduct={pr} />:''
-    )
+    if (pr.price < 12000) {
+        return (
+          <Child1 
+          key={i} 
+          index={i} 
+          deleteProduct={()=> this.deleteProduct(pr.id)} 
+          updateProductIncrement={()=> this.updateProductIncrement(i)} 
+          updateProductDecrement={()=> this.updateProductDecrement(i)} 
+          inncomingProduct={pr} />
+        )
+    }
+   
   })
     
     return (
@@ -57,6 +61,18 @@ export default class Parent extends Component {
       <div className='container'>
         <div className='row  g-3 bg-secondary'>
           {allProducts}
+        </div>
+
+        <div className='row mt-3'>
+          <div className='col-12 col-md-6 text-center d-flex flex-column gap-3 mb-3'>
+            <Link to='FuncComponent4' className='btn btn-primary'>Go to FuncComponent4</Link>
+            <Link to='FuncComponent3' className='btn btn-primary'>Go to FuncComponent3</Link>
+          </div> 
+          <div className='col-12 col-md-6 text-center'>
+            <div className='bg-light p-5'>
+              <Outlet></Outlet>
+            </div>
+          </div> 
         </div>
       </div>
 
