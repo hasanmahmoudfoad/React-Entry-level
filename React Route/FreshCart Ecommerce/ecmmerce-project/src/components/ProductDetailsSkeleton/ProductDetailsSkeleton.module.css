@@ -1,0 +1,61 @@
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-main-image {
+  height: 400px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.skeleton-thumbnail {
+  height: 80px;
+  width: 80px;
+}
+
+.skeleton-title {
+  height: 40px;
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+.skeleton-price {
+  height: 30px;
+  width: 30%;
+  margin-bottom: 20px;
+}
+
+.skeleton-rating {
+  height: 25px;
+  width: 40%;
+  margin-bottom: 20px;
+}
+
+.skeleton-text {
+  height: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.skeleton-stock {
+  height: 25px;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.skeleton-button {
+  height: 50px;
+  width: 150px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

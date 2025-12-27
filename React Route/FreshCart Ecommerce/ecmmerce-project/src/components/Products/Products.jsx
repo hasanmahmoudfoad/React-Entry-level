@@ -5,10 +5,12 @@ import Slider from '../Slider/Slider';
 import axios from 'axios';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import { Link } from 'react-router';
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 
 export default function Products() {
   const [Products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchAllProducts() {
     try {
@@ -17,12 +19,15 @@ export default function Products() {
       console.log(`Products data`, data);
     } catch (error) {
       console.error("Error fetching Products: ", error);
+    }finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
     fetchAllProducts();
   }, []);
+  if (loading) return <LoadingScreen />
 
   return (
     <>
@@ -39,8 +44,8 @@ export default function Products() {
                     <Slider images={product.images} id={product._id} />
 
                     <div className="card-body">
+                      <p className="text-start">{product.quantity}</p>
                       <h5 className="card-title text-center">{product.title}</h5>
-                      {/* <h5 className="card-title text-center">{product.title}</h5> */}
                     </div>
                   </div>
                 </Link>

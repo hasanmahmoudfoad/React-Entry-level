@@ -9,12 +9,13 @@ import 'swiper/css/scrollbar';
 
 export default function Slider({images}) {
 
-   const [imageArr, setImageArr] = useState(images);
+   const [imageArr, setImageArr] = useState([]);
    const [prID, setprID] = useState('');
 
    useEffect(() => {
      setImageArr(images);
-     console.log(` images`, images);
+    //  console.log(` images`, images);
+    //  console.log(` imageArr`, imageArr);
    }, []);
 
   return (
