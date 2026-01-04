@@ -18,7 +18,7 @@ export default function ProductImagesSlider({ propImages }) {
   //   console.log(`array of images`, images);
   // }, []);
 
-  console.log(`array of propImages`, propImages);
+  // console.log(`array of propImages`, propImages);
 
   return (
     <>

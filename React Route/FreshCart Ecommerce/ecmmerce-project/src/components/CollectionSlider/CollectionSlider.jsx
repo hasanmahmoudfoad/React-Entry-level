@@ -17,7 +17,8 @@ export default function CollectionSlider() {
     try {
       const { data } = await axios('https://ecommerce.routemisr.com/api/v1/categories');
       setCollection(data.data);
-      console.log('Products data', data.data);
+      console.log(data.data);
+      
     } catch (error) {
       console.error("Error fetching Collections: ", error);
     }
@@ -51,7 +52,7 @@ export default function CollectionSlider() {
               <div key={collection._id} className="col-12 col-md-6 col-lg-4 mb-4">
 
 
-                <SwiperSlide>
+                <SwiperSlide key={collection._id} >
                   <div className={styles.slideContainer}>
                     <div className={styles.collectionImgContainer}>
                       <img className={styles.collectionImg} src={collection.image} />

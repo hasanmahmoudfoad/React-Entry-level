@@ -3,5 +3,11 @@
     "editor.inlineSuggest.edits.showCollapsed": false,
     "editor.inlineSuggest.experimental.showOnSuggestConflict": "never",
     "editor.inlineSuggest.enabled": false,
-    "editor.quickSuggestionsDelay": 5
+    "editor.quickSuggestionsDelay": 5,
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on"
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": true
 }
