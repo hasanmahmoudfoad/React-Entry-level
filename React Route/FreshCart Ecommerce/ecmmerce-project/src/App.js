@@ -1,10 +1,10 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { Toaster } from "react-hot-toast";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
-import Cart from "./components/Cart/Cart";
 import Collections from "./components/Collections/Collections";
 import Brands from "./components/Brands/Brands";
 import Products from "./components/Products/Products";
@@ -13,9 +13,11 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import RegisterYup from "./components/RegisterYup/RegisterYup";
+import Checkout from "./components/Checkout/Checkout";
+import Shopify from "./components/Shopify/Shopify";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
-
+import { Offline, Online } from "react-detect-offline";
 
 import { useContext } from "react";
 
@@ -57,18 +59,18 @@ function App() {
           ),
         },
         {
-          path: "Cart",
-          element: (
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          ),
-        },
-        {
           path: "Collections",
           element: (
             <ProtectedRoute>
               <Collections />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "Checkout",
+          element: (
+            <ProtectedRoute>
+              <Checkout />
             </ProtectedRoute>
           ),
         },
@@ -85,6 +87,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Products />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "Shopify",
+          element: (
+            <ProtectedRoute>
+              <Shopify />
             </ProtectedRoute>
           ),
         },
@@ -108,9 +118,11 @@ function App() {
     <StoreVarsProvider>
       <CartContextProvider>
         <RouterProvider router={routers}></RouterProvider>
+        <Toaster />
+        <Offline>You are offline</Offline>
       </CartContextProvider>
     </StoreVarsProvider>
   );
 }
- 
+
 export default App;

@@ -1,60 +1,141 @@
 import axios from "axios";
-import { createContext, useContext } from "react";
+import toast from "react-hot-toast";
+import { createContext, useContext, useState } from "react";
 import { storeVars } from "../Context/global";
 
 export const cartContext = createContext();
 
 export default function CartContextProvider(props) {
   const { userToken } = useContext(storeVars);
+  const [cartData, setcartData] = useState();
+  const [cartLoading, setcartLoading] = useState(false);
 
-  async function addToCart(productId) {
-    return await axios.post(
+  const getCartItems = async () => {
+    setcartLoading(true);
+    const getResponse = await axios.get(
       `https://ecommerce.routemisr.com/api/v1/cart`,
+      { headers: userToken }
+    );
+    setcartData(getResponse.data);
+    console.log("getCartItems Called", getResponse.data);
+    localStorage.setItem("userCartID", getResponse.data.cartId);
+    setcartLoading(false);
+    return getResponse;
+  };
+
+  const addToCart = async (productId) => {
+    setcartLoading(true);
+
+    const addResponse = await toast.promise(
+      axios.post(
+        `https://ecommerce.routemisr.com/api/v1/cart`,
+        { productId: productId },
+        { headers: userToken }
+      ),
       {
-        productId: productId,
-      },
-      {
-        headers: userToken,
+        loading: "Adding item...",
+        success: (data) => data.data.message,
+        error: (err) => err.response?.data?.message || "Error adding item",
       }
     );
-  }
+    setcartData(addResponse.data);
+    console.log("addToCart Called", addResponse.data);
+    setcartLoading(false);
 
+    return addResponse;
+  };
 
-  async function deleteCartItem(productId) {
-    try {
-      const response = await axios.delete(
+  const deleteCartItem = async (productId) => {
+    setcartLoading(true);
+
+    const deleteResponse = await toast.promise(
+      axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
+        headers: userToken,
+      }),
+      {
+        loading: "Deleting...",
+        success: `Deleted`,
+        error: "Error while deleting item",
+      }
+    );
+    setcartData(deleteResponse.data);
+    console.log("deleteResponse Called", deleteResponse.data);
+    setcartLoading(false);
+    return deleteResponse;
+  };
+
+  const editCartItem = async (productId, qty) => {
+    setcartLoading(true);
+
+    const editResponse = await toast.promise(
+      axios.put(
         `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
+        { count: qty },
         { headers: userToken }
-      );
-      return response; // Return the response if successful
-    } catch (error) {
-      console.error("Error deleting cart item:", error); // Log the error
-      throw error; // Optionally rethrow the error for further handling
-    }
-  }
+      ),
+      {
+        loading: "Updating item...",
+        success: "Item updated successfully!",
+        error: "Failed to update item",
+      }
+    );
 
+    setcartData(editResponse.data);
+    setcartLoading(false);
+    return editResponse;
+  };
 
-  async function getCartItems() {
-    return await axios.get(`https://ecommerce.routemisr.com/api/v1/cart`, {
-      headers: userToken,
-    });
-  }
+  const clearAllCart = async () => {
+    setcartLoading(true);
 
+    const clearResponse = await toast.promise(
+      axios.delete(`https://ecommerce.routemisr.com/api/v1/cart`, {
+        headers: userToken,
+      }),
+      {
+        loading: "Removing Items...",
+        success: "Cart cleared successfully!",
+        error: "Failed",
+      }
+    );
+    setcartData(null);
+    console.log("clearResponse Called", clearResponse.data);
+    setcartLoading(false);
+    return clearResponse;
+  };
 
-  async function clearAllCart() {
-    return await axios.delete(`https://ecommerce.routemisr.com/api/v1/cart`, {
-      headers: userToken,
-    });
-  }
+  const onlinePayment = async (cartID, shippingAddress) => {
+    const checkoutResponse = await toast.promise(
+      axios.post(
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartID}?url=http://localhost:3000`,
+        { shippingAddress: shippingAddress },
+        { headers: userToken }
+      ),
+      {
+        loading: "Loading Payment...",
+        success: ("Redirecting..."),
+        error: (err) =>
+          err.response?.data?.message || "Error while loading payment",
+      }
+    );
+
+    console.log("checkoutResponse Called");
+    window.location.href = checkoutResponse?.data?.session.url;
+    return checkoutResponse;
+  };
 
   return (
     <cartContext.Provider
       value={{
-        randomNumber: 66,
         addToCart,
         getCartItems,
         clearAllCart,
         deleteCartItem,
+        editCartItem,
+        cartData,
+        setcartData,
+        cartLoading,
+        onlinePayment,
       }}
     >
       {props.children}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Helmet } from "react-helmet";
 
 export default function Collections() {
   const [collections, setCollections] = useState([]);
@@ -20,6 +21,9 @@ export default function Collections() {
 
   return (
     <>
+    <Helmet>
+      <title>Collections</title>
+    </Helmet>
       <div className="container my-5"> {/* Bootstrap container and spacing */}
         <h2 className="text-center mb-4">Collections Component</h2>
         <div className="row"> {/* Bootstrap row for grid layout */}

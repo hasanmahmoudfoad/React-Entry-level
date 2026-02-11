@@ -32,7 +32,7 @@ export default function Slider({images}) {
         {
            imageArr.map((imgSrc, index) => (
              <SwiperSlide key={index}>
-               <div className='border border-danger'>
+               <div className='border-bottom'>
                 <img src={imgSrc} alt={`Slide ${index + 1}`} className="img-fluid" />
                </div>
              </SwiperSlide>

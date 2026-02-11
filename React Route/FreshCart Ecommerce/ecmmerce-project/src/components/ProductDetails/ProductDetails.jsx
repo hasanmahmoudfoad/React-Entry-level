@@ -13,12 +13,7 @@ export default function ProductDetails() {
 
   const [ProductDetail, setProductDetail] = useState({});
   const [loading, setLoading] = useState(true);
-  let { addToCart } = useContext(cartContext);
-
-  async function addProduct(id) {
-    let resp = await addToCart(id);
-    console.log(resp);
-  }
+  let { addToCart, getCartItems, cartLoading } = useContext(cartContext);
 
   useEffect(() => {
     getProductDetails();
@@ -103,33 +98,33 @@ export default function ProductDetails() {
                   </div>
                 </>
               }
-              <form>
-                <legend>Select the product quantity</legend>
-                <div className="mb-3">
-                  <label htmlFor="productQuantity" className="form-label">
-                    Quantity
-                  </label>
-                  <input
-                    type="number"
-                    id="productQuantity"
-                    className="form-control"
-                    min={1}
-                    max={10}
-                    defaultValue={1}
-                  />
-                </div>
+              <div className="position-relative">
                 <button
-                type="button"
-                  onClick={() => addProduct(ProductDetail._id)}
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasScrolling"
+                  aria-controls="offcanvasScrolling"
+                  type="button"
+                  onClick={async () => {
+                    await addToCart(ProductDetail._id);
+                    await getCartItems();
+                  }}
                   className="btn btn-primary w-100 btn-lg"
                 >
                   Add to cart
                 </button>
-              </form>
+                {cartLoading ? (
+                  <div className="text-center position-absolute top-0 start-0 w-100 h-100 bg-white opacity-50 z-3 d-flex align-items-center justify-content-center">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     </>
   );
 }
